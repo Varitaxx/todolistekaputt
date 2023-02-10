@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head th:replace="fragments.html :: head(${title})"></head>
+
+<body>
+<nav th:replace="fragments.html :: mainNav"></nav>
+
+<main class="container my-3">
+    <div class="row">
+        <div class="col-sm-6">
+            <h1>Neuer Todo</h1>
+
+            <form method="post" th:action="@{/save}" th:object="${task}">
+
+                <input type="hidden" th:field="*{id}">
+
+
+                <!--/* Formularfeld wird mit einer Objekteigenschaft des Tasks verbunden */-->
+
+                <div class="mb-3">
+                    <label for="todo" class="form-label" >Todo</label>
+                    <input type="text" class="form-control" th:field="*{todo}" th:classappend="${#fields.hasErrors('todo')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('todo')}" th:errors="*{todo}"></div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="datum" class="form-label" >Datum</label>
+                    <input type="text" th:field="*{datum}" class="form-control" th:classappend="${#fields.hasErrors('datum')} ? 'is-invalid' : ''">
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('datum')}" th:errors="*{datum}"></div>
+                </div>
+
+                <button class="btn btn-success">Speichern</button>
+            </form>
+
+        </div>
+    </div>
+</main>
+<footer class="container"></footer>
+
+<script src="/webjars/bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
